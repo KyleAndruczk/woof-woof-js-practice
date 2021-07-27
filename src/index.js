@@ -57,21 +57,21 @@ dogBar.addEventListener('click', evnt => {
 })
 
 function toggleFilter(btn) {
-    if (btn.textContent === "Filter good dogs: OFF"){
-        fetchDogs(true)
-        btn.textContent = "Filter good dogs: ON"
-    }
-    else {
-        fetchDogs()
-        btn.textContent = "Filter good dogs: OFF"
-    }
+
 }
 
 filterContainer.addEventListener('click', evnt =>{
     if (evnt.target.matches('button')) {
         // console.log(allDogs)
         // dogBar.innerHTML = ""
-        toggleFilter(evnt.target)
+        if (evnt.target.textContent === "Filter good dogs: OFF"){
+            fetchDogs(true)
+            evnt.target.textContent = "Filter good dogs: ON"
+        }
+        else {
+            fetchDogs()
+            evnt.target.textContent = "Filter good dogs: OFF"
+        }
 
     }
 })
