@@ -56,18 +56,22 @@ dogBar.addEventListener('click', evnt => {
 
 })
 
+function toggleFilter(btn) {
+    if (btn.textContent === "Filter good dogs: OFF"){
+        fetchDogs(true)
+        btn.textContent = "Filter good dogs: ON"
+    }
+    else {
+        fetchDogs()
+        btn.textContent = "Filter good dogs: OFF"
+    }
+}
+
 filterContainer.addEventListener('click', evnt =>{
     if (evnt.target.matches('button')) {
         // console.log(allDogs)
         // dogBar.innerHTML = ""
-        if (evnt.target.textContent === "Filter good dogs: OFF"){
-            fetchDogs(true)
-            evnt.target.textContent = "Filter good dogs: ON"
-        }
-        else {
-            fetchDogs()
-            evnt.target.textContent = "Filter good dogs: OFF"
-        }
+        toggleFilter(evnt.target)
 
     }
 })
@@ -113,8 +117,17 @@ info.addEventListener("click", evnt => {
                 body: JSON.stringify({ isGoodDog: newGoodness })
             })
                 .then(r => r.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    console.log(data)
+                    const filterBtn = filterContainer.querySelector('button#good-dog-filter')
+
+                    filterBtn.textContent === "Filter good dogs: ON" ? fetchDogs(true) : fetchDogs()
+                })
         })
+
+
+            
+        
     }
 })
  
